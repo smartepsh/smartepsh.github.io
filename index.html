@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-02 Thu 22:12 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TinyEpicQuest 说明书</title>
+<meta name="author" content="Kenton Wang" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-tp:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">TinyEpicQuest 说明书</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org97b4cb6">1. 组件介绍</a></li>
+<li><a href="#org7864dfc">2. 概述</a>
+<ul>
+<li><a href="#orge317838">2.1. 游戏目标</a></li>
+<li><a href="#orga793dc7">2.2. 游戏点数</a></li>
+<li><a href="#org6ee25cc">2.3. 游戏机制</a></li>
+</ul>
+</li>
+<li><a href="#orgb9b5e01">3. 准备阶段</a></li>
+<li><a href="#org5988105">4. 游戏流程</a>
+<ul>
+<li><a href="#org0a66b82">4.1. 白天</a>
+<ul>
+<li><a href="#orged9b9a2">4.1.1. 玩家回合执行</a></li>
+<li><a href="#orgd0f95fb">4.1.2. 结算</a></li>
+<li><a href="#org83a0017">4.1.3. 概念解释</a></li>
+</ul>
+</li>
+<li><a href="#orgf7eb5fa">4.2. 夜晚</a>
+<ul>
+<li><a href="#org59774f1">4.2.1. 玩家回合执行</a></li>
+<li><a href="#org37f31e4">4.2.2. 结算</a></li>
+<li><a href="#org685fedf">4.2.3. 概念解释</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgc810277">5. 终局</a></li>
+<li><a href="#orgd076931">6. 动作解释</a>
+<ul>
+<li><a href="#org4952637">6.1. 任务卡</a>
+<ul>
+<li><a href="#orgab70c26">6.1.1. 移动类任务卡</a></li>
+<li><a href="#org2a26a0a">6.1.2. 珍宝类任务卡</a></li>
+</ul>
+</li>
+<li><a href="#org0bb5366">6.2. 探索神庙</a></li>
+<li><a href="#orgfeba383">6.3. 传说物品</a></li>
+<li><a href="#org0ba2214">6.4. 学习咒语</a></li>
+</ul>
+</li>
+<li><a href="#org88a60e3">7. 单人游戏</a>
+<ul>
+<li><a href="#orgae1be7f">7.1. 准备阶段</a></li>
+<li><a href="#org778f04f">7.2. 白天</a></li>
+<li><a href="#orgd3278b8">7.3. 夜晚</a>
+<ul>
+<li><a href="#org8ae076a">7.3.1. 结算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgff323af">8. FAQ</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org97b4cb6" class="outline-2">
+<h2 id="org97b4cb6"><span class="section-number-2">1.</span> 组件介绍</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+此处不做图示了，仅以表格列出。中文名称为自己翻译，能表示意思即可。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">英文名称</th>
+<th scope="col" class="org-left">中文名称</th>
+<th scope="col" class="org-right">数量</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Player Card</td>
+<td class="org-left">玩家卡</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Map Card</td>
+<td class="org-left">地图卡</td>
+<td class="org-right">17</td>
+<td class="org-left">分两类：城堡、普通；分两面：亮面、暗面</td>
+</tr>
+
+<tr>
+<td class="org-left">Magic Card</td>
+<td class="org-left">魔力卡</td>
+<td class="org-right">1</td>
+<td class="org-left">分两面：单人、多人</td>
+</tr>
+
+<tr>
+<td class="org-left">Magic Token</td>
+<td class="org-left">魔力指示物</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Round Card</td>
+<td class="org-left">回合卡</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Round Token</td>
+<td class="org-left">回合指示物</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Quest Card</td>
+<td class="org-left">任务卡</td>
+<td class="org-right">24</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Adventure Card</td>
+<td class="org-left">冒险卡</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">分两面：冒险、休整</td>
+</tr>
+
+<tr>
+<td class="org-left">Movement Card</td>
+<td class="org-left">移动方式卡</td>
+<td class="org-right">5</td>
+<td class="org-left">正面标记有移动方式</td>
+</tr>
+
+<tr>
+<td class="org-left">Adventure Dice</td>
+<td class="org-left">冒险骰子</td>
+<td class="org-right">5</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Gobin Token</td>
+<td class="org-left">哥布林指示物</td>
+<td class="org-right">16</td>
+<td class="org-left">分两面：红色（攻击性）、绿色（消极）</td>
+</tr>
+
+<tr>
+<td class="org-left">Hero</td>
+<td class="org-left">英雄小人</td>
+<td class="org-right">12</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Spell Token</td>
+<td class="org-left">咒语指示物</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Health Token</td>
+<td class="org-left">生命值指示物</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Power Token</td>
+<td class="org-left">能力值指示物</td>
+<td class="org-right">4</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Legendary Item</td>
+<td class="org-left">传说物品</td>
+<td class="org-right">12([剑+盾+法杖]/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Treasure Item</td>
+<td class="org-left">珍宝</td>
+<td class="org-right">12</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">First Player Token</td>
+<td class="org-left">第一个玩家指示物</td>
+<td class="org-right">1</td>
+<td class="org-left">分两面：任务完成、未完成</td>
+</tr>
+
+<tr>
+<td class="org-left">Item Rack</td>
+<td class="org-left">物品展示架</td>
+<td class="org-right">1</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Max Health Marker</td>
+<td class="org-left">最大生命值指示物</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Max Power Marker</td>
+<td class="org-left">最大能力值指示物</td>
+<td class="org-right">4(1/player)</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org7864dfc" class="outline-2">
+<h2 id="org7864dfc"><span class="section-number-2">2.</span> 概述</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orge317838" class="outline-3">
+<h3 id="orge317838"><span class="section-number-3">2.1.</span> 游戏目标</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+在终局时，拥有最多的 <code>游戏点数</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga793dc7" class="outline-3">
+<h3 id="orga793dc7"><span class="section-number-3">2.2.</span> 游戏点数</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+可以通过 <code>做任务</code> ， <code>与哥布林战斗</code> ， <code>学习咒语</code> 和 <code>获得传说物品</code> 获得。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6ee25cc" class="outline-3">
+<h3 id="org6ee25cc"><span class="section-number-3">2.3.</span> 游戏机制</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>每局游戏拥有 <b>五个回合</b></li>
+<li>每个回合分为 <b>白天</b> 和 <b>黑夜</b> 两个阶段</li>
+<li><b>五个回合</b> 后统计 <code>游戏点数</code> ，最高者获胜</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb9b5e01" class="outline-2">
+<h2 id="orgb9b5e01"><span class="section-number-2">3.</span> 准备阶段</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>为每名玩家分配一种颜色的 <code>玩家卡</code> ，然后：
+
+<ol class="org-ol">
+<li>同色 <code>英雄小人</code> 3 个</li>
+<li><code>最大生命值指示物</code> 和 <code>生命值指示物</code> 各 1 个放在 <code>玩家卡</code> 的最上方，均为 6 点生命值</li>
+<li><code>最大能力值指示物</code> 和 <code>能力值指示物</code> 各 1 个放在 <code>玩家卡</code> 的最上放，均为 3 点能力值</li>
+<li>同色 <code>冒险卡</code> 1 个， <code>冒险</code> 面朝上</li>
+<li><code>传说物品</code> 一组 [剑+盾+法杖] ，放在 <code>玩家卡</code> 对应行位置的最左侧</li>
+</ol></li>
+<li>放置 <code>魔力卡</code> ， <code>多人</code> 面朝上
+<ol class="org-ol">
+<li>将对应玩家颜色的 <code>咒语指示物</code> 放在 <code>魔力卡</code> 的左下外侧（咒语库），代表 0 级咒语</li>
+
+<li>将 <code>魔力指示物</code> 放在 <code>魔力卡</code> 的左上侧（魔力路径）的第一个格子内</li>
+</ol></li>
+
+<li>将 <code>回合卡</code> 放在桌面上，并将 <code>回合指示物</code> 放在卡片右半部分代表 <code>第一回合</code> 的格子上（共 5 个格子，分别代表全部 5 个回合）</li>
+
+<li>构建地图
+<ol class="org-ol">
+<li>将地图分为两大类， 4 张 <code>城堡地图卡</code> 和 13 张 <code>常规地图卡</code></li>
+<li>使用 <code>亮面</code> 构建地图</li>
+<li>将 <code>常规地图卡</code> 洗牌，抽取 5 张，组成 <code>中心十字型区域</code></li>
+<li>将 <code>城堡地图卡</code> 随机放置在 <code>中心十字型区域</code> 的四个角，组成 <code>中心矩形区域</code> ，我们称为 <code>大陆</code></li>
+<li>随机抽取 8 张 <code>常规地图卡</code> ，其中 4 张作为 <code>中心十字型区域</code> 的延伸，另外 4 张在上述 4 张 <code>延伸卡</code> 的旁边，与 <code>城堡地图卡</code> 相连。这 8 张卡及 4 张 <code>城堡地图卡</code> 称为 <code>海岸</code> （假设地图周围都是海）</li>
+</ol></li>
+
+<li>将每名玩家的 3 个 <code>英雄小人</code> 放在对应颜色的 <code>城堡地图卡</code> 里</li>
+
+<li>将 7 个 <code>哥布林指示物</code> 放在 <code>常规地图卡</code> 上的 <code>哥布林洞穴</code> 区域里， <code>绿色消极</code> 面朝上，注意对齐指示物和地图标记的 <code>黄色钻石标记</code> ；将其余 <code>哥布林指示物</code> 放在袋子里，后续会用到</li>
+
+<li>将 5 张 <code>移动方式卡</code> 排成一条线，面朝上放置</li>
+
+<li>将 <code>任务卡</code> 洗牌后，面朝下放置；抽出其中的 3 张，排成一条线，面朝上放置。必须保持有至少 1 张 <code>移动类任务卡</code> 和 1 张 <code>珍宝类任务卡</code> ，如果不符合要求，则将第一张 <code>任务卡</code> 废弃至 <code>废弃任务</code> 堆，继续翻开下一张 <code>任务卡</code> ，直至符合要求</li>
+
+<li>将 <code>珍宝</code> 放置在 <code>物品展示架</code> 上，并将 5 个 <code>冒险骰子</code> 放在每名玩家可以够到的地方</li>
+
+<li>将 <code>第一个玩家指示物</code> 放在第一个玩家面前，由他开始游戏， <code>任务未完成</code> 面朝上</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org5988105" class="outline-2">
+<h2 id="org5988105"><span class="section-number-2">4.</span> 游戏流程</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+由拥有 <code>第一个玩家指示物</code> 的玩家开始，进行 “五天” 的游戏，从 <b>第一天</b> 的 <b>白天</b> 开始。
+</p>
+</div>
+
+<div id="outline-container-org0a66b82" class="outline-3">
+<h3 id="org0a66b82"><span class="section-number-3">4.1.</span> 白天</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+无论有几名玩家，每个白天都会有 4 个回合的操作：
+</p>
+
+<ul class="org-ul">
+<li>如果有 4 个玩家，则每个玩家各执行一个回合</li>
+<li>如果有 3 个玩家，则依次执行，第一个玩家会有两个回合</li>
+<li>如果有 2 个玩家，则依次执行，每个玩家都会有两个回合</li>
+</ul>
+</div>
+
+<div id="outline-container-orged9b9a2" class="outline-4">
+<h4 id="orged9b9a2"><span class="section-number-4">4.1.1.</span> 玩家回合执行</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ol class="org-ol">
+<li>选择一张正面朝上的 <code>移动方式卡</code> ，将其向上推出，然后二选一：
+<ol class="org-ol">
+<li><a href="#org47586b4">移动</a>，然后考虑完成 <a href="#orgab70c26">移动类任务卡</a> 的任务</li>
+
+<li><a href="#org4768bf5">原地不动</a></li>
+</ol></li>
+<li>其余玩家使用你所选择的 <code>移动方式卡</code> ，和你一样作出二选一的选择</li>
+<li>当所有玩家均作出选择并执行后，将被选择的 <code>移动方式卡</code> 翻面，并向下推回。在 <code>当天</code> 内无法再次使用该移动方式</li>
+<li>下一个玩家重复执行回合，直至 4 个回合执行完毕，进入结算</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd0f95fb" class="outline-4">
+<h4 id="orgd0f95fb"><span class="section-number-4">4.1.2.</span> 结算</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+没有特殊操作，此时确认 <code>移动方式卡</code> 状态，应该是 4 个反面朝上，1 个正面朝上。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org83a0017" class="outline-4">
+<h4 id="org83a0017"><span class="section-number-4">4.1.3.</span> 概念解释</h4>
+<div class="outline-text-4" id="text-4-1-3">
+</div>
+<ol class="org-ol">
+<li><a id="org1d0a1b6"></a>区域<br />
+<div class="outline-text-5" id="text-4-1-3-1">
+<p>
+每张 <code>地图卡</code> 都拥有左、右两个 <code>区域</code> , 上下分割 <b>不作为</b> <code>区域</code> 划分依据。
+即 <code>左上</code> 与 <code>左下</code> 为同一区域， <code>右上</code> 与 <code>右下</code> 为同一区域。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">英文名称</th>
+<th scope="col" class="org-left">中文名称</th>
+<th scope="col" class="org-left">英雄限制</th>
+<th scope="col" class="org-left">特殊效果</th>
+<th scope="col" class="org-left">特殊说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Temple</td>
+<td class="org-left">神庙</td>
+<td class="org-left">两个玩家各一</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">SpellObelisk</td>
+<td class="org-left">咒语碑</td>
+<td class="org-left">每个玩家各一</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">MushroomGrotto</td>
+<td class="org-left">蘑菇洞穴</td>
+<td class="org-left">每个玩家各一</td>
+<td class="org-left">(可选)立即执行描述效果</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">GoblinPortal</td>
+<td class="org-left">哥布林家门口</td>
+<td class="org-left">仅一个</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Castle</td>
+<td class="org-left">城堡</td>
+<td class="org-left">任意</td>
+<td class="org-left">立即获得 1 点 <code>生命值</code> 或 <code>能力值</code></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+
+<li><a id="org47586b4"></a>移动<br />
+<div class="outline-text-5" id="text-4-1-3-2">
+<p>
+将你的一个 <code>英雄小人</code> 根据 <code>移动方式卡</code> 移动到一个 <a href="#org1d0a1b6">区域</a> 里。
+</p>
+
+<ul class="org-ul">
+<li>每次移动 <code>英雄小人</code> 都必须移动到 <code>区域</code> 上，而非 <code>地图卡</code> 上</li>
+<li><b>不能</b> 在同一张 <code>地图卡</code> 的不同 <code>区域</code> 间移动</li>
+<li>交通工具
+<dl class="org-dl">
+<dt>马</dt><dd>横向移动（陆路），距离任意</dd>
+<dt>竹筏</dt><dd>纵向移动（内陆河流），距离任意</dd>
+<dt>狮鹫</dt><dd>四角移动（飞行），距离任意</dd>
+<dt>11 路</dt><dd>任意方向（步行），仅能到达相邻的 <code>地图卡</code></dd>
+<dt>船</dt><dd>由 <code>海岸</code> 到达任何 <code>海岸</code> ，如果你没有 <code>英雄小人</code> 在 <code>海岸</code> ，则无法通过 <code>坐船</code> 进行移动，玩家必须 <a href="#org4768bf5">原地不动</a></dd>
+</dl></li>
+</ul>
+</div>
+
+<ol class="org-ol">
+<li><a id="org35de424"></a>路过/途经 哥布林<br />
+<div class="outline-text-6" id="text-4-1-3-2-1">
+<p>
+沿途经过的 <code>地图卡</code> （排除始发地及目的地）为 <code>路过/途经地图卡</code> ， <code>坐船</code> 沿途的所有 <code>海岸</code> 均为 <code>路过/途经地图卡</code> 。
+</p>
+
+<ol class="org-ol">
+<li>当 <code>路过/途经地图卡</code> 有 <code>具有攻击性</code> 的 <code>哥布林指示物</code> 时，每遇到依次，便需要花费 1 点 <code>能力值</code> ，然后将 <code>哥布林指示物</code> 翻面至 <code>绿色（消极）</code> ，并对齐 <code>黄色钻石标记</code></li>
+<li>当你的终点 <code>区域</code> 有 <code>具有攻击性</code> 的 <code>哥布林指示物</code> 时，*不需要* 花费 <code>能力值</code> ，便可将 <code>哥布林指示物</code> 翻面至 <code>绿色（消极）</code> ，并对齐 <code>黄色钻石标记</code> （如果终点 <code>地图卡</code> 有 <code>具有攻击性</code> 的 <code>哥布林指示物</code> ，但你的目标区域并不是 <code>哥布林家门口</code> ，那么什么都不发生）</li>
+<li>如果你无力支付所需的 <code>能力值</code> 时，则此次移动计划失败，需要另行选择计划；若无任何可选计划，则 <a href="#org4768bf5">原地不动</a></li>
+</ol>
+</div>
+</li>
+</ol>
+</li>
+
+<li><a id="org4768bf5"></a>原地不动<br />
+<div class="outline-text-5" id="text-4-1-3-3">
+<p>
+跳过移动。
+</p>
+
+<ul class="org-ul">
+<li>如果有至少一个 <code>英雄小人</code> 在任意 <code>城堡</code> 中，你可以获得 1 点 <code>生命值</code> 或 <code>能力值</code></li>
+<li>如果有多个 <code>英雄小人</code> 在 <code>城堡</code> 中，仍然只能获得 1 点 <code>生命值</code> 或 <code>能力值</code></li>
+<li><code>生命值</code> 或 <code>能力值</code> 不能超过 <code>最大生命值</code> 或 <code>最大能力值</code></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf7eb5fa" class="outline-3">
+<h3 id="orgf7eb5fa"><span class="section-number-3">4.2.</span> 夜晚</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+玩家需要掷五枚 <code>冒险骰子</code> 来完成不同种类的冒险。
+</p>
+
+<ul class="org-ul">
+<li>在 <code>神庙</code> 寻找 <code>珍宝</code></li>
+<li>在 <code>哥布林家门口</code> 攻击他（真惨）</li>
+<li>在 <code>咒语碑</code> 学习咒语</li>
+</ul>
+
+<p>
+当你的 <code>冒险卡</code> 的 <code>冒险</code> 朝上时，你将被任务要参与冒险，直到 <code>休整</code> 面朝上。
+</p>
+
+<p>
+由 <code>第一名玩家</code> 开始，掷五枚 <code>冒险骰子</code> ，进入 <code>夜晚</code> 阶段。
+</p>
+</div>
+
+<div id="outline-container-org59774f1" class="outline-4">
+<h4 id="org59774f1"><span class="section-number-4">4.2.1.</span> 玩家回合执行</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ol class="org-ol">
+<li><code>冒险</code> 或者 <code>休整</code> 二选一
+<ol class="org-ol">
+<li><a href="#org52a1287">休整</a> ：将 <code>冒险卡</code> 翻面，使 <code>休整</code> 面朝上，并将 <code>冒险骰子</code> 给到下一位 <code>冒险卡</code> 为 <code>冒险</code> 面朝上的玩家</li>
+<li><a href="#org39ecabd">冒险</a></li>
+</ol></li>
+<li>将 <code>冒险骰子</code> 递给下一个 <code>冒险</code> 的玩家，重复执行</li>
+</ol>
+</div>
+
+<ol class="org-ol">
+<li><a id="org39ecabd"></a>冒险<br />
+<div class="outline-text-5" id="text-4-2-1-1">
+<p>
+公开投掷所有五枚 <code>冒险骰子</code> ，按照结果依次执行结算。
+</p>
+<ol class="org-ol">
+<li><code>哥布林</code> 造成伤害
+<ul class="org-ul">
+<li>若有 X 个 <code>冒险骰子</code> 的结果是造成伤害，那么就从掷骰子的那个玩家开始，依次对每名 <code>冒险</code> 玩家造成 1 点伤害，直至 X 点伤害被全部分配完（有可能对同一名玩家造成多次伤害）</li>
+<li>伤害可以被 <code>防御</code> ，依据 <code>玩家卡</code> 的内容防御伤害，要在造成伤害的时候， <b>立即</b> <code>防御</code></li>
+<li><code>魔力等级</code> 可能会对每次的 <code>伤害值</code> 有所影响</li>
+<li><a href="#org2e3dea9">死亡</a></li>
+</ul></li>
+<li>获得 <code>能力值</code>
+<ul class="org-ul">
+<li>若有 X 个 <code>冒险骰子</code> 的结果是获得 <code>能力值</code> ，那么同上，=冒险= 玩家依次获得 1 点 <code>能力值</code> ，直至分配完毕</li>
+<li><code>魔力等级</code> 可能会使该效果失效</li>
+</ul></li>
+<li><code>魔力提升</code> 并（可能）造成伤害
+<ul class="org-ul">
+<li>若有 X 个 <code>冒险骰子</code> 的结果是 <code>魔力提升</code> ，那么将 <code>魔力指示物</code> 沿 <code>魔力卡</code> 前进 X 步 ，这代表 <a href="#orgc96295c">魔力等级</a></li>
+<li>先 <code>魔力提升</code> ，后 <code>结算</code></li>
+<li>如果 <code>魔力等级</code> 为最高，则同时造成 X 点伤害，伤害分配规则同上</li>
+<li><code>魔力伤害</code> 无法被 <code>防御</code></li>
+<li><code>魔力等级</code> 到达最高之后， <b>当晚</b> 则一直停留在最高等级</li>
+</ul></li>
+<li>（所有 <code>冒险</code> 的玩家可以同时利用） <code>火炬</code> 和 <code>卷轴=（为了探索 =神庙</code> ）
+<ul class="org-ul">
+<li>若有 X 个 <code>冒险骰子</code> 的结果是 <code>火炬</code> 或 <code>卷轴</code> ，那么每名 <code>冒险</code> 玩家都可以消耗 X 个资源，进行移动；这些移动可以由同一个 <code>英雄小人</code> 执行，也可以由多个 <code>英雄小人</code> 一起执行，但移动总消耗不能大于 X</li>
+<li><a href="#org734dbac">更进一步 Forge Ahead</a></li>
+</ul></li>
+<li>（所有 <code>冒险</code> 的玩家可以同时利用） <code>攻击</code> 哥布林
+<ul class="org-ul">
+<li>若有 X 个 <code>冒险骰子</code> 的结果是 <code>攻击</code> ，则对应位置的 <code>英雄小人</code> 可以对 <code>哥布林</code> 造成 X 点伤害</li>
+<li>每个 <code>哥布林</code> 共有 5 点生命值，以 <code>哥布林指示物</code> 的六个角为标记， <code>黄色钻石标记</code> 为满血， <code>红色骷髅标记</code> 为死亡</li>
+<li>X 点伤害可以分配给多个 <code>英雄小人</code> 使用</li>
+<li>当 <code>哥布林</code> 死亡时，将 <code>哥布林指示物</code> 立刻拿走，用于终局计分</li>
+<li>每一个被你拿走的 <code>哥布林指示物</code> ，都将会为你增加 1 点 <code>最大生命值</code></li>
+<li>如果你在 <code>击败</code> 哥布林之前，选择了 <code>休整</code> 或 <code>死亡</code> ，你的哥布林家门口的 <code>英雄小人</code> 需要返回 <code>城堡</code> ，并且已经造成的伤害无效。另外，如果哥布林在一整晚都没有被 <code>击败</code> ，那么哥布林会恢复到 <code>满血</code> 。</li>
+</ul></li>
+</ol>
+</div>
+</li>
+
+<li><a id="org52a1287"></a>休整<br />
+<div class="outline-text-5" id="text-4-2-1-2">
+<p>
+无论什么原因造成的 <code>休整</code> ，你都要将 <code>冒险卡</code> 翻到 <code>休整</code> ；然后 <b>必须</b>  根据你的 <code>英雄小人</code> 所在的 <code>区域</code> ，进行结算：
+</p>
+
+<ul class="org-ul">
+<li>在 <code>哥布林家门口</code> 、 <code>咒语碑</code> 、 <code>神庙</code> 的最后一块石板上的 <code>英雄小人</code> ，都必须返回 <code>城堡</code> 。如果是自己选择的 <code>休整</code> ，则认为你完成了 <code>神庙的探索</code> ，并且可以学习 <code>咒语</code> （如果条件允许）。</li>
+<li>在 <code>蘑菇洞穴</code> 、 <code>城堡</code> 、 <code>神庙</code> 的非最后一块石板上的 <code>英雄小人</code> ，只能原地休息，直至第二天白天。除非你 <code>狗带</code> 了。</li>
+<li>每有一个 <code>英雄小人</code> 返回 <code>城堡</code> ，你都可以获得 1 点 <code>生命值</code> 或 <code>能力值</code> ；如果你是 <code>狗带</code> 的，那么你会 <code>重生</code> （6 点生命值和 3 点能力值）。</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org37f31e4" class="outline-4">
+<h4 id="org37f31e4"><span class="section-number-4">4.2.2.</span> 结算</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<p>
+当所有玩家均 <code>休整</code> 完成后，进入结算。需要为第二天白天做些准备：
+</p>
+<ul class="org-ul">
+<li>将 <code>魔力指示物</code> 初始化</li>
+<li>将 <code>消极</code> 的 <code>哥布林指示物</code> 翻面转变为 <code>具有攻击性的</code></li>
+<li>为没有 <code>哥布林</code> 的 <code>哥布林家门口</code> 放置新的 <code>消极</code> 的 <code>哥布林指示物</code></li>
+<li>将所有 <code>移动方式卡</code> 正面朝上放置</li>
+<li>如果 <code>第一个玩家指示物</code> 表示 <code>未完成任务</code> ，则将 <b>最右侧</b> 的 <code>任务卡</code> 放置于 <code>废弃任务卡</code> 堆，并抽取新 <code>任务卡</code> ，始终保持有 3 张 <code>任务卡</code> 可用</li>
+<li>将 <code>第一个玩家指示物</code> 传给下一位玩家</li>
+<li>将 <code>回合指示物</code> 在 <code>回合卡</code> 上前进一步</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org685fedf" class="outline-4">
+<h4 id="org685fedf"><span class="section-number-4">4.2.3.</span> 概念解释</h4>
+<div class="outline-text-4" id="text-4-2-3">
+</div>
+<ol class="org-ol">
+<li><a id="org2e3dea9"></a>死亡<br />
+<div class="outline-text-5" id="text-4-2-3-1">
+<p>
+当你的 <code>生命值</code> 降低到 0 ，你就 <code>狗带</code> 了。你需要 <b>立刻</b> <code>休整</code> ，所有的 <code>英雄小人</code> 返回到 <code>城堡中</code> ；无视 <code>最大生命值</code> 和 <code>最大能力值</code> ，将 <code>生命值</code> 和 <code>能力值</code> 置为 6 和 3 ，并降低一级 <code>咒语等级</code> 。
+</p>
+</div>
+</li>
+
+<li><a id="orgc96295c"></a>魔力等级<br />
+<div class="outline-text-5" id="text-4-2-3-2">
+<p>
+共分为 4 级：
+</p>
+<dl class="org-dl">
+<dt>0 级</dt><dd>无法学习 <code>咒语</code></dd>
+<dt>1 级</dt><dd>可以学习比 <code>咒语等级</code> 高 1 级的 <code>咒语</code></dd>
+<dt>2 级</dt><dd>可以学习比 <code>咒语等级</code> 高 2 级的 <code>咒语</code> ； <code>哥布林</code> 每次造成 2 点伤害；无法获得 <code>能力值</code></dd>
+<dt>3 级</dt><dd>可以学习比 <code>咒语等级</code> 高 3 级的 <code>咒语</code> ； <code>哥布林</code> 每次造成 3 点伤害；无法获得 <code>能力值</code> ； <code>魔力</code> 同样会造成伤害</dd>
+</dl>
+</div>
+</li>
+
+<li><a id="org734dbac"></a>更进一步 Forge Ahead<br />
+<div class="outline-text-5" id="text-4-2-3-3">
+<p>
+在夜晚的任意时刻，任何在探索 <code>神庙</code> 的 <code>冒险</code> 玩家，都可以使用 <code>玩家卡</code> 的能力，消耗 <code>能力值</code> 去获得 <code>火炬</code> 或 <code>卷轴</code> 。他们同时可以和 <code>冒险骰子</code> 的 <code>火炬</code> 或 <code>卷轴</code> 结合使用。可以使用多次。
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc810277" class="outline-2">
+<h2 id="orgc810277"><span class="section-number-2">5.</span> 终局</h2>
+<div class="outline-text-2" id="text-5">
+<ol class="org-ol">
+<li>通过 <code>回合卡</code> 上的分值标记，每位玩家统计自己拥有的各种资源，计算总分，总分最高者为胜利者。</li>
+<li>若有相同总分者，按照 <code>任务</code> 、 <code>哥布林指示物</code> 、 <code>最大咒语等级</code> 和 <code>物品总量</code> 的顺序比较，直到分出胜负。</li>
+<li>若仍然无法分出胜负，则共同胜利！</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd076931" class="outline-2">
+<h2 id="orgd076931"><span class="section-number-2">6.</span> 动作解释</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org4952637" class="outline-3">
+<h3 id="org4952637"><span class="section-number-3">6.1.</span> 任务卡</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>有 3 张翻开的 <code>任务卡</code> 可供符合条件的玩家执行</li>
+<li>必须保持有至少 1 张 <code>移动类任务卡</code> 和 1 张 <code>珍宝类任务卡</code> ，如果不符合要求，则将第一张 <code>任务卡</code> 废弃至 <code>废弃任务</code> 堆，继续翻开下一张 <code>任务卡</code> ，直至符合要求</li>
+<li>每当有 <code>任务卡</code> 被拿走，立刻将剩余的 <code>任务卡</code> 向右对齐，并抽取一张新的 <code>任务卡</code> 放在任务队列的最左侧</li>
+<li>如果 <code>任务卡</code> 堆空了，重新将 <code>废弃任务</code> 堆洗牌，并作为新的 <code>任务卡</code> 堆</li>
+<li>如果连 <code>废弃任务</code> 堆都空了，那么就以没有 <code>任务卡</code> 的状态完成游戏</li>
+<li>每个回合内只能完成一个 <code>任务</code> ，如果你可以完成多个任务，那么你只能选择一个</li>
+</ul>
+</div>
+
+<div id="outline-container-orgab70c26" class="outline-4">
+<h4 id="orgab70c26"><span class="section-number-4">6.1.1.</span> 移动类任务卡</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+在 <code>移动</code> 之后，如果你符合任务要求，则可以宣告 <code>执行任务</code> ，然后拿走该任务卡，将其放在你的 <code>已完成任务</code> 牌堆，并立即获得任务奖励。
+</p>
+
+<p>
+<code>已完成任务</code> 牌堆会在最后用于计算 <code>游戏点数</code> 。
+</p>
+
+<p>
+注意，必须是先移动，再做任务；而不能是先做任务再移动；也不能原地休息后做任务，必须作出移动的动作才可以。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2a26a0a" class="outline-4">
+<h4 id="org2a26a0a"><span class="section-number-4">6.1.2.</span> 珍宝类任务卡</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<p>
+完成对应的 <a href="#org0bb5366">探索神庙</a> 之后，你可以在 <code>白天</code> 或 <code>夜晚</code> 完成任务：
+</p>
+<ul class="org-ul">
+<li>在白天，你必须是第一个到达 <code>神庙</code> 的英雄</li>
+<li><p>
+在夜晚，你必须是到达 <code>神庙</code> 并且是第一个进入 <code>休息状态</code> 的英雄
+</p>
+
+<p>
+当你完成任务后，拿走该任务卡，将其放在你的 <code>已完成任务</code> 牌堆，并立即获得 <code>珍宝</code> ，同时， <code>英雄小人</code> 返回你的 <code>城堡</code> ：
+</p>
+<ul class="org-ul">
+<li>当你获得 <code>珍宝</code> 时，你需要立即为 <code>英雄小人</code> 装备他。</li>
+<li>每个 <code>英雄小人</code> 有两只手去持有 <code>珍宝</code> （即可持有两个）</li>
+<li>可以为你的 <code>英雄小人</code> 交换或转移 <code>珍宝</code> ，但必须在你自己的 <code>城堡</code> 里进行</li>
+<li>如果完成任务时，=英雄小人= 没有手了，那么 <code>珍宝</code> 会被传送至自己的 <code>城堡</code> 里，你可以随时在 <code>城堡</code> 里装备他</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org0bb5366" class="outline-3">
+<h3 id="org0bb5366"><span class="section-number-3">6.2.</span> 探索神庙</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+<code>神庙</code> 里拥有 <code>珍宝</code> 和 <code>传说物品</code> 。在白天，你可以将你的 <code>英雄小人</code> 移动到 <code>神庙入口</code> ，在夜晚就可以探索这个 <code>神庙</code> 了。
+</p>
+
+<p>
+<code>神庙</code> 共有 4 块 <code>石板(Track)</code> ，在夜晚通过投掷 <code>冒险骰子</code> 的结果或使用 <code>更进一步</code> 或 <code>蘑菇洞穴</code> 来前进。 <code>石板</code> 上印有前进所需的 <code>火炬</code> 或 <code>卷轴</code> 数，计算所有拥有的 <code>火炬</code> 或 <code>卷轴</code> 一次性结算他们（可分配给不同 <code>英雄小人</code> ）。
+</p>
+
+<ul class="org-ul">
+<li>当 <code>英雄小人</code> 在 <code>白天</code> 到达了 <code>神庙</code> 的 <b>最后一块</b> <code>石板</code> （通过 <code>蘑菇洞穴</code> ），则立即 <code>探索完成</code> ，你的 <code>英雄小人</code> 会立即返回 <code>城堡</code> ，并获得 1 点 <code>生命值</code> 或 <code>能力值</code> ；同时如果你满足条件的话，可以完成 <code>珍宝类任务卡</code> ，并将 <code>传说物品</code> 在你的 <code>玩家卡</code> 上前进一格。</li>
+<li>当 <code>英雄小人</code> 在 <code>晚上</code> 到达了 <code>神庙</code> 的 <b>最后一块</b> <code>石板</code> ，那么只有在玩家进入 <code>休整</code> 的时候，才算 <code>探索完成</code> 。如果玩家 <code>狗带</code> 了，则不算 <code>探索完成</code> （记得狗带要返回城堡哦）。</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgfeba383" class="outline-3">
+<h3 id="orgfeba383"><span class="section-number-3">6.3.</span> 传说物品</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+每名玩家有 3 种 <code>传说物品</code> , 并不是由 <code>探索神庙</code> 奖励，而是按照 <code>玩家卡</code> 上的标记顺序，依次 <code>探索完成</code> 的奖励。每完成一个对应 <code>神庙</code> ，将 <code>传说物品</code> 向前挪动一格，当挪动到最后时，算作 <code>已装备</code> ，可以使用说明能力。
+</p>
+
+<p>
+同时完成两座 <code>神庙</code> 的探索，并不能直接装备 <code>传说物品</code> ，只能结算一次。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0ba2214" class="outline-3">
+<h3 id="org0ba2214"><span class="section-number-3">6.4.</span> 学习咒语</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+学习咒语意味着 <code>咒语等级</code> 的增加，他可以用于计算 <code>游戏点数</code> ，帮助你取得胜利。
+</p>
+
+<p>
+每当你的 <code>咒语等级</code> 提升一级，你的 <code>最大能力值</code> 便会提升 1 点。玩家由 0 级开始游戏。
+</p>
+
+<p>
+为了学习咒语，你必须同时满足几个条件：
+</p>
+
+<ol class="org-ol">
+<li>在 <code>夜晚</code> 必须 <code>休整</code></li>
+<li>必须有 <code>英雄小人</code> 在 <code>咒语碑</code> ，且该 <code>咒语碑</code> 要和你要学习的 <code>咒语</code> 标记一致</li>
+<li><code>魔力等级</code> + <code>咒语指示物</code> 必须 <b>大于等于</b> 你要学习的 <code>咒语等级</code></li>
+</ol>
+
+<p>
+当满足了所有条件，当你进入 <code>休整</code> 的时候，你就会习得新的 <code>咒语</code> 了。当然，如果你 <code>狗带</code> 了，那就无法学习咒语了（记得狗带要返回城堡哦）。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org88a60e3" class="outline-2">
+<h2 id="org88a60e3"><span class="section-number-2">7.</span> 单人游戏</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-orgae1be7f" class="outline-3">
+<h3 id="orgae1be7f"><span class="section-number-3">7.1.</span> 准备阶段</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li><code>魔力卡</code> 单人面朝上</li>
+<li>按照多人模式初始化游戏</li>
+<li>不再需要 <code>第一个玩家指示物</code></li>
+<li>选择一个难度（得分总和）作为游戏目标</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org778f04f" class="outline-3">
+<h3 id="org778f04f"><span class="section-number-3">7.2.</span> 白天</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+将所有 5 张 <code>移动方式卡</code> 洗牌，抽取 2 张面朝上放置，选取其中 1 张进行 <code>移动</code> 或 <code>原地不动</code> 。然后再抽取 1 张，与原有剩下的 1 张组成新的 2 张面朝上的 <code>移动方式卡</code> ，重复执行，直至完成了 4 张 <code>移动方式卡</code> 的使用，进入 <code>夜晚</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3278b8" class="outline-3">
+<h3 id="orgd3278b8"><span class="section-number-3">7.3.</span> 夜晚</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+按照 <code>魔力卡</code> 的说明，执行操作。
+</p>
+</div>
+
+<div id="outline-container-org8ae076a" class="outline-4">
+<h4 id="org8ae076a"><span class="section-number-4">7.3.1.</span> 结算</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<ul class="org-ul">
+<li>最右侧的 <code>任务卡</code> 始终会被 <code>丢弃</code> ，无论你完成任务与否</li>
+<li>当你将 <code>哥布林指示物</code> 翻至 <code>具有进攻性</code> 的那一面时，只翻 3 个，由玩家指定</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgff323af" class="outline-2">
+<h2 id="orgff323af"><span class="section-number-2">8.</span> FAQ</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+<a href="https://boardgamegeek.com/thread/1821160/unofficial-faq">Unofficial FAQ | BoardGameGeek</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Kenton Wang</p>
+<p class="date">Created: 2021-12-02 Thu 22:12</p>
+</div>
+</body>
+</html>
